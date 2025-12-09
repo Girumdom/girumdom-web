@@ -1,0 +1,158 @@
+.container {
+    padding: 30px;
+    background-color: #f9fafb;
+    min-height: 100vh;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.headerCard {
+    background: white;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    margin-bottom: 30px;
+}
+
+.backButton {
+    background: none;
+    border: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #666;
+    font-weight: 600;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.profileInfo {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #F0E6F6;
+}
+
+.name {
+    margin: 0;
+    color: #111827;
+    font-size: 28px;
+}
+
+.email {
+    margin: 5px 0 0 0;
+    color: #6B7280;
+}
+
+/* Tabs */
+.tabContainer {
+    display: flex;
+    gap: 20px;
+    border-bottom: 2px solid #e5e7eb;
+    margin-bottom: 30px;
+}
+
+.tab {
+    background: none;
+    border: none;
+    padding: 15px 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: #6B7280;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: all 0.2s;
+}
+
+.activeTab {
+    color: #5A2167;
+    border-bottom-color: #5A2167;
+}
+
+/* Grids & Lists */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.memoryCard {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #e5e7eb;
+}
+
+.imgPlaceholder {
+    height: 150px;
+    background-color: #F0E6F6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cardBody {
+    padding: 15px;
+}
+
+.cardBody h4 { margin: 0 0 5px 0; color: #333; }
+.cardBody p { margin: 0; font-size: 13px; color: #888; }
+
+.playBtn {
+    margin-top: 10px;
+    background: none;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    padding: 5px 12px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.reminderItem {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    border-left: 4px solid #E87127;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.reminderItem h4 { margin: 0 0 5px 0; color: #333; }
+.reminderItem p { margin: 0; color: #666; font-size: 14px; }
+
+.deleteBtn {
+    background: none;
+    border: none;
+    color: #9CA3AF;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.deleteBtn:hover {
+    background-color: #FEE2E2;
+    color: #DC2626; /* Red */
+}
+
+.emptyText {
+    text-align: center;
+    color: #6B7280;
+    padding: 20px;
+    font-style: italic;
+}

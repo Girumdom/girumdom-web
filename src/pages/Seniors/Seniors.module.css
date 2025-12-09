@@ -1,0 +1,99 @@
+.container {
+    padding: 40px;
+    background-color: #f9fafb;
+    min-height: 100vh;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+    border-bottom: 1px solid #e5e7eb;
+    padding-bottom: 20px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    background: white;
+    border-radius: 16px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    border: 1px solid #e5e7eb;
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+}
+
+.avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+    border: 3px solid #F0E6F6;
+}
+
+.name {
+    margin: 0 0 8px 0;
+    color: #111827;
+    font-size: 20px;
+}
+
+.roleBadge {
+    background-color: #F0E6F6;
+    color: #5A2167;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.stats {
+    color: #6B7280;
+    font-size: 14px;
+    margin-top: 15px;
+}
+
+.actionButton {
+    margin-top: 20px;
+    background: none;
+    border: 1px solid #e5e7eb;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-weight: 600;
+    color: #374151;
+    transition: all 0.2s;
+}
+
+.actionButton:hover {
+    background-color: #5A2167;
+    color: white;
+    border-color: #5A2167;
+}
+
+.backButton {
+    background: none;
+    border: none;
+    color: #666;
+    cursor: pointer;
+    text-decoration: underline;
+}

@@ -2,8 +2,12 @@ import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import Login from './pages/Login/Login';
 import Dashboard from './pages/Dashboard/Dashboard'; // Ensure you have this file created
+import Seniors from './pages/Seniors/Seniors';
+import SeniorProfile from './pages/Seniors/SeniorProfile';
 import { useAuth } from './context/authContext';
 import MainLayout from './layouts/MainLayout';
+import CreateMemory from './pages/Memories/CreateMemory';
+import CreateReminder from './pages/Reminders/CreateReminder';
 
 // 1. A Helper Component to protect pages
 // If user is not logged in, it bounces them back to Login
@@ -47,6 +51,10 @@ function App() {
           <Route path="/reminders" element={<div>Reminders Page</div>} />
           <Route path="/memories" element={<div>Memories Page</div>} />
           <Route path="/collaboration" element={<div>Collaboration Page</div>} />
+          <Route path="/seniors" element={<Seniors />} />
+          <Route path="/seniors/:id" element={<SeniorProfile />} />
+          <Route path="/create-memory" element={<CreateMemory />} />
+          <Route path="/create-reminder" element={<CreateReminder />} />
       </Route>
 
       {/* DEFAULT CATCH-ALL */}

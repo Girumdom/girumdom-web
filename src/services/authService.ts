@@ -1,8 +1,9 @@
 import axios from 'axios';
+import { BACKEND_URL } from '../constant';
 
 // 1. Define your backend URL (Make sure this matches your server)
 // If you are running locally, it is usually http://localhost:3000
-const API_URL = 'https://backend-5s4b.onrender.com'; 
+const API_URL = `${BACKEND_URL}`; 
 
 // 2. The function that talks to the backend
 export const loginUser = async (email: string, pass: string) => {

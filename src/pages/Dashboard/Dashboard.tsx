@@ -68,7 +68,7 @@ const Dashboard = () => {
                 
                 {/* Quick Actions (Replaces Mobile FAB) */}
                 <div className={styles.actionGroup}>
-                    <button onClick={() => navigate('/reminders')} className={styles.actionButtonSecondary}>
+                    <button onClick={() => navigate('/create-reminder')} className={styles.actionButtonSecondary}>
                         <AddIcon size={20} />
                         <span>Add Reminder</span>
                     </button>
@@ -81,7 +81,7 @@ const Dashboard = () => {
 
             {/* 2. STATS OVERVIEW */}
             <div className={styles.statsGrid}>
-                <div className={styles.statCard}>
+                <div className={styles.statCard} onClick={() => navigate('/seniors')} style={{cursor: 'pointer'}}>
                     <div className={styles.statIconBoxPurple}>
                         <PeopleIcon size={28} color="#5A2167" />
                     </div>
