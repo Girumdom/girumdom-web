@@ -176,7 +176,7 @@ const Dashboard = () => {
                 <div className={styles.panel}>
                     <div className={styles.panelHeader}>
                         <h3 className={styles.panelTitle}>Recent Memories</h3>
-                        <button onClick={() => navigate('/meminders')} className={styles.seeAllLink}>View Gallery</button>
+                        <button onClick={() => navigate('/memories')} className={styles.seeAllLink}>View Gallery</button>
                     </div>
 
                     <div className={styles.listContainer}>

@@ -1,0 +1,116 @@
+/* Container for the split card */
+.loginContainer {
+    display: flex;
+    width: 100%;
+    max-width: 900px;
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
+    min-height: 550px;
+}
+
+/* Left Side (Brand) */
+.brandPanel {
+    flex: 1;
+    background: linear-gradient(135deg, #5A2167 0%, #381242 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    color: white;
+    text-align: center;
+}
+
+.brandLogo { width: 80px; height: 80px; margin-bottom: 20px; border-radius: 16px; }
+.brandTitle { font-size: 32px; font-weight: 800; margin: 0 0 10px 0; }
+.brandTagline { font-size: 16px; opacity: 0.9; line-height: 1.6; }
+
+/* Right Side (Form) */
+.formPanel {
+    flex: 1.2;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #ffffff; /* Ensure white background */
+}
+
+/* --- FIX: Added specific styles for the header container --- */
+.formHeader {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column; /* Forces text to stack vertically */
+    gap: 8px; /* Adds space between Title and Subtitle */
+}
+
+.welcomeTitle { 
+    font-size: 28px; 
+    color: #111827; 
+    margin: 0; 
+    line-height: 1.2;
+    margin-bottom: 5px;
+}
+
+.welcomeSub { 
+    color: #6B7280; 
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 25px;
+}
+
+/* Input Styles */
+.inputGroup { margin-bottom: 20px; width: 100%; }
+.inputLabel { display: block; font-size: 14px; font-weight: 600; color: #374151; margin-bottom: 8px; }
+.inputWrapper { position: relative; display: flex; align-items: center; width: 100%; }
+.inputIcon { position: absolute; left: 12px; color: #9CA3AF; display: flex; align-items: center; pointer-events: none; }
+
+.input {
+    width: 100%; 
+    padding: 12px 12px 12px 40px; 
+    border: 1px solid #E5E7EB; 
+    border-radius: 8px; 
+    font-size: 16px; 
+    transition: all 0.2s;
+    box-sizing: border-box; /* Prevents padding from breaking width */
+}
+.input:focus { border-color: #5A2167; outline: none; box-shadow: 0 0 0 3px rgba(90, 33, 103, 0.1); }
+
+/* Buttons */
+.signInButton {
+    width: 100%; background-color: #E87127; color: white; padding: 14px; border: none; border-radius: 8px; font-weight: 700; font-size: 16px; cursor: pointer; transition: background 0.2s; margin-top: 10px;
+}
+.signInButton:hover { background-color: #d1621e; }
+.buttonDisabled { background-color: #fdba74; cursor: not-allowed; }
+
+/* Links */
+.optionsRow { display: flex; justify-content: flex-end; margin-bottom: 15px; }
+.forgotPasswordLink { background: none; border: none; color: #5A2167; font-weight: 600; cursor: pointer; font-size: 14px; }
+.forgotPasswordLink:hover { text-decoration: underline; }
+
+.signupContainer { margin-top: 30px; text-align: center; color: #6B7280; font-size: 14px; }
+.signupLink { background: none; border: none; color: #5A2167; font-weight: 700; cursor: pointer; margin-left: 5px; font-size: 14px; }
+.signupLink:hover { text-decoration: underline; }
+
+.errorBanner {
+    background-color: #FEF2F2; color: #DC2626; padding: 12px; border-radius: 8px; font-size: 14px; margin-bottom: 25px; text-align: center; border: 1px solid #FECACA;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .loginContainer { 
+        flex-direction: column; 
+        max-width: 450px; 
+        min-height: auto; 
+    }
+    .brandPanel { 
+        padding: 30px; 
+    }
+    .formPanel { 
+        padding: 30px; 
+    }
+    .welcomeTitle {
+        font-size: 24px;
+    }
+}

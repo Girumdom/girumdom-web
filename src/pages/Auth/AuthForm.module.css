@@ -1,0 +1,122 @@
+.container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f3f4f6; /* Light gray background */
+    background-image: linear-gradient(135deg, #5A2167 0%, #2D1033 100%); /* Optional: Brand background */
+    padding: 20px;
+}
+
+.card {
+    background: white;
+    width: 100%;
+    max-width: 450px;
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.logo {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 15px;
+    border-radius: 12px;
+}
+
+.title {
+    margin: 0;
+    font-size: 24px;
+    color: #111827;
+}
+
+.subtitle {
+    margin: 5px 0 0;
+    color: #6B7280;
+    font-size: 14px;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.field label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: #374151;
+}
+
+.field input, .select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #D1D5DB;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border-color 0.2s;
+    background-color: #fff; /* Ensure white background for select */
+}
+
+.field input:focus, .select:focus {
+    outline: none;
+    border-color: #5A2167;
+    box-shadow: 0 0 0 3px rgba(90, 33, 103, 0.1);
+}
+
+.errorBanner {
+    background-color: #FEF2F2;
+    color: #DC2626;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 14px;
+    margin-bottom: 20px;
+    text-align: center;
+    border: 1px solid #FECACA;
+}
+
+.submitBtn {
+    background-color: #E87127;
+    color: white;
+    font-weight: 700;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+    transition: background-color 0.2s;
+}
+
+.submitBtn:hover {
+    background-color: #d1621e;
+}
+
+.submitBtn:disabled {
+    background-color: #fdba74;
+    cursor: not-allowed;
+}
+
+.footer {
+    margin-top: 25px;
+    text-align: center;
+    font-size: 14px;
+    color: #6B7280;
+}
+
+.link {
+    color: #5A2167;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.link:hover {
+    text-decoration: underline;
+}

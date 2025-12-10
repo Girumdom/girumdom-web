@@ -1,15 +1,20 @@
 import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import Login from './pages/Login/Login';
-import Dashboard from './pages/Dashboard/Dashboard'; // Ensure you have this file created
+import { useAuth } from './context/authContext';
+
+// routes
+import Login from './pages/Auth/Login';
+import Dashboard from './pages/Dashboard/Dashboard';
 import Seniors from './pages/Seniors/Seniors';
 import SeniorProfile from './pages/Seniors/SeniorProfile';
-import { useAuth } from './context/authContext';
 import MainLayout from './layouts/MainLayout';
 import CreateMemory from './pages/Memories/CreateMemory';
 import CreateReminder from './pages/Reminders/CreateReminder';
 import Reminders from './pages/Reminders/Reminders';
 import Memories from './pages/Memories/Memories';
+import Signup from './pages/Auth/Signup';
+import ForgotPassword from './pages/Auth/ForgotPassword';
+import VerifyReset from './pages/Auth/VerifyReset';
 
 // 1. A Helper Component to protect pages
 // If user is not logged in, it bounces them back to Login
@@ -42,6 +47,9 @@ function App() {
         path="/login" 
         element={!user ? <Login /> : <Navigate to="/dashboard" replace />} 
       />
+      <Route path="/signup" element={<Signup />} />
+      <Route path="/forgot-password" element={<ForgotPassword />} />
+      <Route path="/verify-reset" element={<VerifyReset />} />
 
       {/* DASHBOARD ROUTE (PROTECTED) */}
       {/* Only accessible if ProtectedRoute approves it */}
