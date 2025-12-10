@@ -11,6 +11,8 @@ import {
     IoCloudUploadOutline
 } from "react-icons/io5";
 import styles from './Dashboard.module.css';
+import axios from 'axios';
+import { BACKEND_URL } from '../../constant';
 
 const CalendarIcon = IoCalendarClearOutline as React.ElementType;
 const AlarmIcon = IoAlarmOutline as React.ElementType;
@@ -39,7 +41,7 @@ interface Reminder {
 }
 
 const Dashboard = () => {
-    const { user, logout } = useAuth();
+    const { user, token } = useAuth();
     const navigate = useNavigate();
 
     // --- Date Logic (From Mobile) ---
@@ -52,6 +54,37 @@ const Dashboard = () => {
     const [memories, setMemories] = useState<Memory[]>([]); 
     const [reminders, setReminders] = useState<Reminder[]>([]);
     const [isLoading, setIsLoading] = useState(false);
+
+    useEffect(() => {
+        const loadDashboardData = async () => {
+            if (!token) return;
+            
+            try {
+                // 1. Fetch Reminders
+                // This hits the route that calls your updated 'getAllRemindersByUserID'
+                const reminderRes = await axios.get(`${BACKEND_URL}/api/reminders`, {
+                    headers: { Authorization: `Bearer ${token}` }
+                });
+                setReminders(reminderRes.data);
+
+                // 2. Fetch Memories
+                // Note: Ensure the endpoint matches your backend route ('/api/memory')
+                const memoryRes = await axios.get(`${BACKEND_URL}/api/memory`, {
+                    headers: { Authorization: `Bearer ${token}` }
+                });
+                
+                // We slice(0, 4) to show only the 4 most recent memories
+                setMemories(memoryRes.data.slice(0, 4));
+
+            } catch (error) {
+                console.error("Dashboard load failed:", error);
+            } finally {
+                setIsLoading(false);
+            }
+        };
+
+        loadDashboardData();
+    }, [token]);
 
     return (
         <div className={styles.container}>

@@ -156,3 +156,10 @@
     padding: 20px;
     font-style: italic;
 }
+
+.actionIconBtn {
+    background: none; border: none; cursor: pointer; padding: 8px;
+    border-radius: 50%; color: #6B7280; transition: all 0.2s;
+    display: flex; align-items: center; justify-content: center;
+}
+.actionIconBtn:hover { background-color: #F3F4F6; color: #5A2167; }

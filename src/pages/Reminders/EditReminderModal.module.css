@@ -1,0 +1,80 @@
+.overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: rgba(0,0,0,0.5); /* Dimmed background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    backdrop-filter: blur(2px);
+}
+
+.modal {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+.header h3 { margin: 0; color: #111827; }
+
+.closeBtn {
+    background: none; border: none; cursor: pointer; color: #666;
+    padding: 4px; border-radius: 4px;
+}
+.closeBtn:hover { background-color: #f3f4f6; }
+
+.form { display: flex; flex-direction: column; gap: 15px; }
+
+.field label { 
+    display: block; font-size: 14px; font-weight: 600; 
+    margin-bottom: 5px; color: #374151; 
+}
+
+.input, .textarea, .select {
+    width: 100%; padding: 10px; 
+    border: 1px solid #d1d5db; border-radius: 6px; 
+    font-size: 16px; font-family: inherit;
+}
+
+.textarea { resize: vertical; min-height: 80px; }
+
+.row { display: flex; gap: 15px; }
+.row .field { flex: 1; }
+
+.actions {
+    display: flex; justify-content: flex-end; gap: 10px; margin-top: 10px;
+}
+
+.saveBtn {
+    background: #E87127; color: white; 
+    padding: 10px 20px; border: none; border-radius: 6px; 
+    font-weight: 600; cursor: pointer;
+    transition: background-color 0.2s;
+}
+.saveBtn:hover { background-color: #c25e00; }
+.saveBtn:disabled { background-color: #fdba74; cursor: not-allowed; }
+
+.cancelBtn {
+    background: #f3f4f6; color: #374151; 
+    padding: 10px 20px; border: none; border-radius: 6px; 
+    font-weight: 600; cursor: pointer;
+}
+.cancelBtn:hover { background-color: #e5e7eb; }

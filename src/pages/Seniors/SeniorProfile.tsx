@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useAuth } from '../../context/authContext';
-import { IoArrowBack, IoPersonCircle, IoCalendar, IoImage, IoPlayCircleOutline, IoTrashOutline } from "react-icons/io5";
+import EditReminderModal from '../Reminders/EditReminderModal';
+import { IoArrowBack, IoPersonCircle, IoCalendar, IoImage, IoPlayCircleOutline, IoTrashOutline, IoPencil } from "react-icons/io5";
 import styles from './SeniorProfile.module.css';
 import { BACKEND_URL } from '../../constant';
 
@@ -19,6 +20,8 @@ interface Reminder {
     reminder_id: number;
     title: string;
     reminder_date: string;
+    description: string | null;
+    repeat_interval: string;
 }
 
 interface SeniorData {
@@ -35,6 +38,7 @@ const ImageIcon = IoImage as React.ElementType;
 const PlayCircleIcon = IoPlayCircleOutline as React.ElementType;
 const PersonIcon = IoPersonCircle as React.ElementType;
 const TrashIcon = IoTrashOutline as React.ElementType;
+const PencilIcon = IoPencil as React.ElementType;
 
 const SeniorProfile = () => {
     const { id } = useParams(); // Get :senior_id from URL
@@ -44,6 +48,7 @@ const SeniorProfile = () => {
     const [data, setData] = useState<SeniorData | null>(null);
     const [loading, setLoading] = useState(true);
     const [activeTab, setActiveTab] = useState<'memories' | 'reminders'>('memories');
+    const [editingReminder, setEditingReminder] = useState<Reminder | null>(null);
 
     const handleDeleteReminder = async (reminderId: number) => {
         if (!window.confirm("Are you sure you want to delete this reminder?")) return;
@@ -66,23 +71,24 @@ const SeniorProfile = () => {
         }
     };
 
+    const fetchDetails = useCallback(async () => {
+        try {
+            const res = await axios.get(`${BACKEND_URL}/api/collaborations/seniors/${id}`, {
+                headers: { Authorization: `Bearer ${token}` }
+            });
+            setData(res.data);
+        } catch (error) {
+            console.error("Failed to load profile", error);
+            alert("Could not load senior details.");
+            navigate('/seniors');
+        } finally {
+            setLoading(false);
+        }
+    }, [id, token, navigate]);
+
     useEffect(() => {
-        const fetchDetails = async () => {
-            try {
-                const res = await axios.get(`${BACKEND_URL}/api/collaborations/seniors/${id}`, {
-                    headers: { Authorization: `Bearer ${token}` }
-                });
-                setData(res.data);
-            } catch (error) {
-                console.error("Failed to load profile", error);
-                alert("Could not load senior details.");
-                navigate('/seniors');
-            } finally {
-                setLoading(false);
-            }
-        };
         if (token && id) fetchDetails();
-    }, [token, id, navigate]);
+    }, [fetchDetails, token, id]);
 
     if (loading) return <div className={styles.container}>Loading...</div>;
     if (!data) return null;
@@ -173,6 +179,15 @@ const SeniorProfile = () => {
                                         </div>
                                     </div>
 
+                                    {/* EDIT BUTTON */}
+                                    <button 
+                                        className={styles.actionIconBtn} 
+                                        onClick={() => setEditingReminder(rem)}
+                                        title="Edit"
+                                    >
+                                        <PencilIcon size={18} />
+                                    </button>
+
                                     {/* DELETE BUTTON */}
                                     <button 
                                         className={styles.deleteBtn}
@@ -187,6 +202,17 @@ const SeniorProfile = () => {
                     </div>
                 )}
             </div>
+
+            {/* MODAL */}
+            {editingReminder && (
+                <EditReminderModal
+                    isOpen={!!editingReminder}
+                    reminder={editingReminder}
+                    token={token ?? ""}
+                    onClose={() => setEditingReminder(null)}
+                    onUpdate={fetchDetails}
+                />
+            )}
         </div>
     );
 };
