@@ -54,21 +54,27 @@ const Dashboard = () => {
     const [memories, setMemories] = useState<Memory[]>([]); 
     const [reminders, setReminders] = useState<Reminder[]>([]);
     const [isLoading, setIsLoading] = useState(false);
+    const [seniorCount, setSeniorCount] = useState(0);
 
     useEffect(() => {
         const loadDashboardData = async () => {
             if (!token) return;
             
             try {
-                // 1. Fetch Reminders
-                // This hits the route that calls your updated 'getAllRemindersByUserID'
+
+                // 1. Fetch Senior Count
+                const seniorsRes = await axios.get(`${BACKEND_URL}/api/collaborations/seniors`, {
+                    headers: { Authorization: `Bearer ${token}` }
+                });
+                setSeniorCount(seniorsRes.data.length);
+
+                // 2. Fetch Reminders
                 const reminderRes = await axios.get(`${BACKEND_URL}/api/reminders`, {
                     headers: { Authorization: `Bearer ${token}` }
                 });
                 setReminders(reminderRes.data);
 
-                // 2. Fetch Memories
-                // Note: Ensure the endpoint matches your backend route ('/api/memory')
+                // 3. Fetch Memories
                 const memoryRes = await axios.get(`${BACKEND_URL}/api/memory`, {
                     headers: { Authorization: `Bearer ${token}` }
                 });
@@ -120,7 +126,7 @@ const Dashboard = () => {
                     </div>
                     <div>
                         <p className={styles.statLabel}>Seniors Monitored</p>
-                        <h2 className={styles.statValue}>{user?.collaboration_count || 0}</h2>
+                        <h2 className={styles.statValue}>{seniorCount}</h2>
                     </div>
                 </div>
 

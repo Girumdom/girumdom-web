@@ -1,0 +1,163 @@
+.overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    backdrop-filter: blur(2px);
+}
+
+.modal {
+    background: white;
+    padding: 30px;
+    border-radius: 16px;
+    width: 90%;
+    max-width: 450px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+    position: relative;
+    animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.closeBtn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #9CA3AF;
+    padding: 5px;
+    border-radius: 50%;
+    transition: all 0.2s;
+}
+
+.closeBtn:hover {
+    background-color: #F3F4F6;
+    color: #374151;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.iconCircle {
+    width: 60px;
+    height: 60px;
+    background-color: #F4ECF8;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 15px auto;
+}
+
+.header h3 {
+    margin: 0 0 5px 0;
+    color: #111827;
+    font-size: 20px;
+}
+
+.header p {
+    margin: 0;
+    color: #6B7280;
+    font-size: 14px;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.field label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #374151;
+}
+
+.inputWrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.inputIcon {
+    position: absolute;
+    left: 12px;
+    color: #9CA3AF;
+    font-size: 20px;
+}
+
+.input {
+    width: 100%;
+    padding: 12px 12px 12px 40px; /* Space for icon */
+    border: 1px solid #D1D5DB;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border-color 0.2s;
+}
+
+.input:focus {
+    border-color: #5A2167;
+    outline: none;
+}
+
+.errorMessage {
+    color: #DC2626;
+    background-color: #FEF2F2;
+    padding: 10px;
+    border-radius: 6px;
+    font-size: 13px;
+    margin: 0;
+    text-align: center;
+}
+
+.submitBtn {
+    background-color: #E87127;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.submitBtn:hover {
+    background-color: #d1621e;
+}
+
+.submitBtn:disabled {
+    background-color: #fdba74;
+    cursor: not-allowed;
+}
+
+/* Success State */
+.successState {
+    text-align: center;
+    padding: 20px 0;
+}
+
+.checkIcon {
+    width: 60px;
+    height: 60px;
+    background-color: #10B981;
+    color: white;
+    border-radius: 50%;
+    font-size: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px auto;
+}

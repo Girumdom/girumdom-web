@@ -8,6 +8,8 @@ import { useAuth } from './context/authContext';
 import MainLayout from './layouts/MainLayout';
 import CreateMemory from './pages/Memories/CreateMemory';
 import CreateReminder from './pages/Reminders/CreateReminder';
+import Reminders from './pages/Reminders/Reminders';
+import Memories from './pages/Memories/Memories';
 
 // 1. A Helper Component to protect pages
 // If user is not logged in, it bounces them back to Login
@@ -48,13 +50,15 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           
           {/* Future pages go here */}
-          <Route path="/reminders" element={<div>Reminders Page</div>} />
-          <Route path="/memories" element={<div>Memories Page</div>} />
           <Route path="/collaboration" element={<div>Collaboration Page</div>} />
           <Route path="/seniors" element={<Seniors />} />
           <Route path="/seniors/:id" element={<SeniorProfile />} />
-          <Route path="/create-memory" element={<CreateMemory />} />
+          
           <Route path="/create-reminder" element={<CreateReminder />} />
+          <Route path="/reminders" element={<Reminders />} />
+
+          <Route path="/memories" element={<Memories />} />
+          <Route path="/create-memory" element={<CreateMemory />} />
       </Route>
 
       {/* DEFAULT CATCH-ALL */}

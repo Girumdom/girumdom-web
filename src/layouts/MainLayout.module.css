@@ -1,0 +1,278 @@
+/* src/components/Layout/MainLayout.module.css */
+
+.layoutContainer {
+    display: flex;
+    min-height: 100vh;
+    background-color: #f9fafb;
+    font-family: 'Open Sans', sans-serif;
+}
+
+/* --- SIDEBAR --- */
+.sidebar {
+    background-color: #5A2167;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    height: 100vh;
+    z-index: 10;
+    box-shadow: 4px 0 10px rgba(0,0,0,0.1);
+    transition: width 0.3s ease; /* Smooth animation for collapse */
+    overflow-x: hidden;
+}
+
+/* Widths controlled by utility classes or inline styles in React */
+.sidebarExpanded { width: 260px; }
+.sidebarCollapsed { width: 80px; }
+
+.brandContainer {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    white-space: nowrap;
+    transition: justify-content 0.3s ease, padding 0.3s ease;
+}
+
+.logo {
+    border-radius: 8px;
+    width: 40px; /* Fixed width prevents squashing */
+}
+
+.brandTitle {
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0;
+}
+
+.nav {
+    padding: 20px 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 1;
+}
+
+/* NAVIGATION ITEMS */
+.navItem {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    background-color: transparent;
+    border: none;
+    border-radius: 8px;
+    color: rgba(255,255,255,0.7);
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 100%; /* Ensure full width */
+}
+
+.navItem:hover {
+    background-color: rgba(255,255,255,0.1);
+    color: white;
+}
+
+.navItemActive {
+    background-color: #E87127 !important;
+    color: white !important;
+    font-weight: 600;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+}
+
+.sidebarFooter {
+    padding: 20px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+.logoutBtn {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    background-color: transparent;
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 8px;
+    color: white;
+    width: 100%;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s;
+}
+
+.logoutBtn:hover {
+    background-color: rgba(255,0,0,0.2);
+    border-color: #ff4d4d;
+}
+
+/* --- MAIN CONTENT --- */
+.mainContent {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    transition: margin-left 0.3s ease;
+}
+
+/* Margins controlled by utility classes or inline styles */
+.contentExpanded { margin-left: 260px; }
+.contentCollapsed { margin-left: 80px; }
+
+.topHeader {
+    height: 70px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 30px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.burgerBtn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s;
+}
+
+.burgerBtn:hover {
+    background-color: #f3f4f6;
+}
+
+.pageTitle {
+    font-size: 18px;
+    font-weight: 600;
+    color: #111827;
+    margin: 0;
+}
+
+.headerActions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.iconBtn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.notifDot {
+    position: absolute;
+    top: 2px;
+    right: 4px;
+    width: 10px;
+    height: 10px;
+    background-color: #EF4444;
+    border-radius: 50%;
+    border: 2px solid white;
+}
+
+.userProfile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.userName {
+    font-size: 14px;
+    font-weight: 600;
+    color: #374151;
+}
+
+.pageWrapper {
+    flex: 1;
+    background-color: #f9fafb;
+    padding: 20px; /* Optional: adds global padding to pages */
+}
+
+/* --- DROPDOWN --- */
+.dropdownMenu {
+    position: absolute;
+    top: 120%;
+    right: 0;
+    width: 320px;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    border: 1px solid #e5e7eb;
+    z-index: 100;
+    overflow: hidden;
+}
+
+.dropdownHeader {
+    margin: 0;
+    padding: 15px 20px;
+    border-bottom: 1px solid #f3f4f6;
+    font-size: 16px;
+    color: #111827;
+    background-color: #f9fafb;
+}
+
+.notifList {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.notifItem {
+    padding: 15px 20px;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.notifContent {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.notifText {
+    margin: 0;
+    font-size: 14px;
+    color: #374151;
+    line-height: 1.4;
+}
+
+.notifTime {
+    font-size: 12px;
+    color: #9CA3AF;
+}
+
+.notifActions {
+    display: flex;
+    gap: 10px;
+    padding-left: 26px;
+}
+
+.acceptBtnSmall, .declineBtnSmall {
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.acceptBtnSmall { background-color: #10B981; color: white; }
+.acceptBtnSmall:hover { background-color: #059669; }
+
+.declineBtnSmall { background-color: #F3F4F6; color: #4B5563; }
+.declineBtnSmall:hover { background-color: #e5e7eb; }
+
+.emptyNotif {
+    padding: 30px;
+    text-align: center;
+    color: #9CA3AF;
+    font-size: 14px;
+}

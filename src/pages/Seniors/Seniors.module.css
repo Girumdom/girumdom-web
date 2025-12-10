@@ -97,3 +97,97 @@
     cursor: pointer;
     text-decoration: underline;
 }
+
+.sectionTitle {
+    font-size: 18px;
+    color: #6B7280;
+    margin: 20px 0 15px 0;
+    display: flex;
+    align-items: center;
+}
+
+.inviteSection {
+    margin-bottom: 30px;
+    background-color: #FDF4FF; /* Light purple tint */
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid #E9D5FF;
+}
+
+.inviteGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 15px;
+}
+
+.inviteCard {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.inviteInfo h3 {
+    margin: 0 0 5px 0;
+    color: #5A2167;
+}
+
+.inviteInfo p {
+    margin: 0 0 8px 0;
+    font-size: 14px;
+    color: #4B5563;
+}
+
+.inviteActions {
+    display: flex;
+    gap: 10px;
+}
+
+.acceptBtn {
+    background-color: #10B981; /* Green */
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.acceptBtn:hover { background-color: #059669; }
+
+.declineBtn {
+    background-color: #EF4444; /* Red */
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.declineBtn:hover { background-color: #DC2626; }
+
+.connectBtn {
+    background-color: #5A2167;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background 0.2s;
+}
+
+.connectBtn:hover {
+    background-color: #43174d;
+}
