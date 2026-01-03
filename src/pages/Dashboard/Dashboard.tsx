@@ -23,7 +23,7 @@ const PeopleIcon = IoPeopleOutline as React.ElementType;
 const CloudIcon = IoCloudUploadOutline as React.ElementType;
 
 
-// --- Types (Matched to your Mobile App) ---
+// Types 
 interface Memory {
     memory_id: number;
     title: string;
@@ -44,13 +44,11 @@ const Dashboard = () => {
     const { user, token } = useAuth();
     const navigate = useNavigate();
 
-    // --- Date Logic (From Mobile) ---
+    // Date Formatting
     const today = new Date();
     const dayOfWeek = today.toLocaleDateString('en-US', { weekday: 'long' });
     const formattedDate = today.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
 
-    // --- State (Ready for your API integration) ---
-    // You can copy your fetchMemories/fetchReminders logic from mobile into a useEffect here later.
     const [memories, setMemories] = useState<Memory[]>([]); 
     const [reminders, setReminders] = useState<Reminder[]>([]);
     const [isLoading, setIsLoading] = useState(false);
@@ -62,19 +60,19 @@ const Dashboard = () => {
             
             try {
 
-                // 1. Fetch Senior Count
+                // Fetch Senior Count
                 const seniorsRes = await axios.get(`${BACKEND_URL}/api/collaborations/seniors`, {
                     headers: { Authorization: `Bearer ${token}` }
                 });
                 setSeniorCount(seniorsRes.data.length);
 
-                // 2. Fetch Reminders
+                // Fetch Reminders
                 const reminderRes = await axios.get(`${BACKEND_URL}/api/reminders`, {
                     headers: { Authorization: `Bearer ${token}` }
                 });
                 setReminders(reminderRes.data);
 
-                // 3. Fetch Memories
+                // Fetch Memories
                 const memoryRes = await axios.get(`${BACKEND_URL}/api/memory`, {
                     headers: { Authorization: `Bearer ${token}` }
                 });
@@ -95,7 +93,7 @@ const Dashboard = () => {
     return (
         <div className={styles.container}>
             
-            {/* 1. HEADER SECTION */}
+            {/* HEADER SECTION */}
             <header className={styles.header}>
                 <div className={styles.welcomeSection}>
                     <h1 className={styles.greeting}>Welcome back, {user?.fullname?.split(' ')[0]}!</h1>
@@ -105,7 +103,7 @@ const Dashboard = () => {
                     </div>
                 </div>
                 
-                {/* Quick Actions (Replaces Mobile FAB) */}
+                {/* Quick Actions */}
                 <div className={styles.actionGroup}>
                     <button onClick={() => navigate('/create-reminder')} className={styles.actionButtonSecondary}>
                         <AddIcon size={20} />
@@ -118,7 +116,7 @@ const Dashboard = () => {
                 </div>
             </header>
 
-            {/* 2. STATS OVERVIEW */}
+            {/* STATS OVERVIEW */}
             <div className={styles.statsGrid}>
                 <div className={styles.statCard} onClick={() => navigate('/seniors')} style={{cursor: 'pointer'}}>
                     <div className={styles.statIconBoxPurple}>
@@ -141,7 +139,7 @@ const Dashboard = () => {
                 </div>
             </div>
 
-            {/* 3. MAIN CONTENT GRID */}
+            {/* MAIN CONTENT GRID */}
             <div className={styles.contentGrid}>
                 
                 {/* LEFT COLUMN: Reminders */}

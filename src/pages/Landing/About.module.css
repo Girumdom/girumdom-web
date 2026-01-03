@@ -1,0 +1,523 @@
+/* Container Layout */
+.container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    font-family: ui-sans-serif, system-ui, -apple-system, sans-serif;
+    background-color: white;
+}
+
+/* REUSED NAVBAR STYLES*/
+.navbar {
+    width: 100%;
+    background-color: #ffffff;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+}
+
+.navContent {
+    max-width: 80rem;
+    margin: 0 auto;
+    padding: 0 1rem;
+    height: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+}
+
+.logo { height: 3.5rem; width: auto; }
+.brandNameLogo { height: 9rem; width: auto; }
+
+.navLinks {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.navLink {
+    color: #374151;
+    font-weight: 600;
+    cursor: default;
+}
+
+.activeLink {
+    color: #9333ea;
+}
+
+.loginBtn {
+    background-color: #9333ea;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background-color 0.15s;
+}
+
+.loginBtn:hover { background-color: #7e22ce; }
+
+/* --- HEADER --- */
+.header {
+    background-color: #f9fafb;
+    padding: 6rem 1rem 4rem 1rem;
+    text-align: center;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.headerContent {
+    max-width: 50rem;
+    margin: 0 auto;
+}
+
+.pageTitle {
+    font-size: 3rem;
+    font-weight: 800;
+    color: #111827;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+}
+
+.pageSubtitle {
+    font-size: 1.25rem;
+    color: #4b5563;
+    line-height: 1.6;
+}
+
+.highlight { color: #9333ea; font-weight: 700; }
+
+/* --- PROCESS SECTIONS (ZIG-ZAG) --- */
+.processSection {
+    padding: 6rem 1rem;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.processContent {
+    max-width: 80rem;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+    align-items: center;
+}
+
+/* Visual Side (Diagram) */
+.visualSide {
+    width: 100%;
+}
+
+.diagramWrapper {
+    background-color: #ffffff;
+    border-radius: 1.5rem;
+    padding: 1rem;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e5e7eb;
+    position: relative;
+    overflow: hidden;
+}
+
+.diagramImage {
+    width: 100%;
+    height: auto;
+    border-radius: 1rem;
+    display: block;
+}
+
+.captionTag {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #6b7280;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+/* Text Side */
+.textSide {
+    width: 100%;
+}
+
+.phaseLabel {
+    text-transform: uppercase;
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: #9333ea;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.5rem;
+}
+
+.sectionHeading {
+    font-size: 2.25rem;
+    font-weight: 800;
+    color: #1f2937;
+    margin-bottom: 1.5rem;
+}
+
+.conceptText {
+    font-size: 1.125rem;
+    color: #4b5563;
+    margin-bottom: 2.5rem;
+    line-height: 1.6;
+    border-left: 4px solid #e9d5ff;
+    padding-left: 1rem;
+}
+
+/* Step List */
+.stepList {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.stepItem {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+}
+
+.iconBox {
+    background-color: #faf5ff;
+    color: #9333ea;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    flex-shrink: 0;
+}
+
+.stepTitle {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: #1f2937;
+    margin: 0 0 0.25rem 0;
+}
+
+.stepDesc {
+    margin: 0;
+    color: #6b7280;
+    line-height: 1.5;
+}
+
+/* --- TECHNICAL SECTION --- */
+.techSection {
+    padding: 4rem 1rem;
+    background-color: #1f2937; /* Dark theme for "Under Hood" */
+    color: white;
+}
+
+.techContainer {
+    max-width: 60rem;
+    margin: 0 auto;
+}
+
+.techToggleBtn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    cursor: pointer;
+    padding: 1rem 0;
+    border-bottom: 1px solid #374151;
+}
+
+.techToggleBtn:hover {
+    color: #e9d5ff;
+}
+
+/* Collapsible Animation */
+.techContent {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease-out;
+}
+
+.showTech {
+    max-height: 500px; /* Arbitrary large height to allow expansion */
+}
+
+.techGrid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    padding-top: 2rem;
+}
+
+.techCard {
+    background-color: rgba(255,255,255,0.05);
+    padding: 1.5rem;
+    border-radius: 1rem;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.techCard h3 {
+    color: #c084fc; /* Light purple */
+    margin-bottom: 0.5rem;
+    font-size: 1.125rem;
+}
+
+.techCard p {
+    color: #9ca3af;
+    line-height: 1.5;
+    font-size: 0.95rem;
+}
+
+/* Audio Demo Styles */
+.sectionAudioDemo {
+    padding: 6rem 1rem;
+    background-color: #faf5ff; /* Very light purple background */
+    text-align: center;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.audioContent {
+    max-width: 60rem;
+    margin: 0 auto;
+}
+
+.audioSubtitle {
+    font-size: 1.125rem;
+    color: #4b5563;
+    margin-bottom: 3rem;
+}
+
+.audioGrid {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    align-items: center;
+}
+
+.audioCard {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 1.5rem;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    border: 2px solid #e5e7eb;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    transition: transform 0.2s;
+}
+
+.audioCardGeneric {
+    /* Style for the "Bad" example */
+    border-color: #e5e7eb;
+}
+
+.audioCardPro {
+    /* Style for the "Good" example */
+    border-color: #9333ea;
+    box-shadow: 0 10px 25px -5px rgba(147, 51, 234, 0.15); /* Purple glow */
+}
+
+/* Badge for the Pro card */
+.audioBadge {
+    position: absolute;
+    top: -12px;
+    background-color: #9333ea;
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    text-transform: uppercase;
+}
+
+.audioLabel {
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 1.5rem;
+    font-size: 1.25rem;
+}
+
+/* Fake Waveform Visuals */
+.waveformVisual {
+    display: flex;
+    gap: 4px;
+    height: 40px;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.bar, .barActive {
+    width: 6px;
+    border-radius: 999px;
+    background-color: #e5e7eb;
+    height: 100%;
+}
+
+.barActive {
+    background-color: #d8b4fe; /* Light purple */
+    animation: bounce 1s infinite;
+}
+
+/* Play Button */
+.playButton {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    background-color: #f3f4f6;
+    color: #374151;
+    transition: all 0.2s;
+}
+
+.playButton:hover {
+    background-color: #e5e7eb;
+}
+
+.playButtonPro {
+    background-color: #9333ea;
+    color: white;
+}
+
+.playButtonPro:hover {
+    background-color: #7e22ce;
+}
+
+.sampleText {
+    margin-top: 1rem;
+    font-size: 0.875rem;
+    color: #6b7280;
+    font-style: italic;
+}
+
+/* Responsive */
+@media (min-width: 768px) {
+    .audioGrid {
+        flex-direction: row;
+        justify-content: center;
+        align-items: stretch;
+    }
+}
+
+/* --- RESPONSIVE --- */
+@media (min-width: 1024px) {
+    .processContent {
+        flex-direction: row;
+        gap: 5rem;
+        align-items: center;
+    }
+
+    .visualSide, .textSide {
+        flex: 1;
+    }
+
+    /* Reverse layout for the second section */
+    .reversedSection .processContent {
+        flex-direction: row-reverse;
+    }
+
+    .techGrid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.showTech {
+    max-height: 2000px; /* Increased from 500px */
+}
+
+/* RESULTS SECTION */
+.resultsSection {
+    margin-top: 4rem;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 3rem;
+}
+
+.resultsTitle {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+
+.resultsSubtitle {
+    color: #9ca3af;
+    text-align: center;
+    margin-bottom: 3rem;
+    max-width: 40rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.resultsGrid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+}
+
+.resultBlock {
+    background-color: rgba(255,255,255,0.03); /* Subtle card bg */
+    border-radius: 1rem;
+    padding: 1.5rem;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.blockTitle {
+    color: #e9d5ff; /* Light Purple */
+    font-size: 1.25rem;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+    text-align: center;
+}
+
+.graphWrapper {
+    background-color: white;
+    padding: 1rem;
+    border-radius: 0.75rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    justify-content: center;
+}
+
+.resultImage {
+    width: 100%;
+    height: auto;
+    max-height: 300px; /* Prevent them from getting too tall */
+    object-fit: contain;
+}
+
+.blockDesc {
+    color: #d1d5db; /* Lighter gray for readability */
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+.blockDesc strong {
+    color: white;
+}
+
+/* Responsive Grid for Results */
+@media (min-width: 1024px) {
+    .resultsGrid {
+        grid-template-columns: 1fr 1fr; /* Side by side on desktop */
+    }
+}

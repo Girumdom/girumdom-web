@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { Outlet, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/authContext';
 import { getPendingInvitations, acceptInvite, declineInvite } from '../services/collaboration';
+import { BACKEND_URL } from '../constant';
 
-// --- STYLES ---
-import styles from './MainLayout.module.css'; // IMPORT THE CSS
+// STYLES
+import styles from './MainLayout.module.css';
 
 import { 
     IoGridOutline, 
@@ -14,7 +15,8 @@ import {
     IoPersonCircleOutline,
     IoNotificationsOutline,
     IoMenu,
-    IoMailOpenOutline
+    IoMailOpenOutline,
+    IoCamera
 } from "react-icons/io5";
 import { FaUsers } from "react-icons/fa";
 
@@ -28,9 +30,15 @@ const NotifIcon = IoNotificationsOutline as React.ElementType;
 const MenuIcon = IoMenu as React.ElementType;
 const ColabIcon = FaUsers as React.ElementType;
 const MailIcon = IoMailOpenOutline as React.ElementType;
+const CameraIcon = IoCamera as React.ElementType;
+
+// Cloudinary Upload Config
+const CLOUDINARY_UPLOAD_PRESET = 'girumdom_upload';
+const CLOUDINARY_CLOUD_NAME = 'dicllpbrr';
+const CLOUDINARY_API_URL = `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`;
 
 const MainLayout = () => {
-    const { user, logout, token } = useAuth();
+    const { user, logout, token, updateUser } = useAuth();
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -40,6 +48,9 @@ const MainLayout = () => {
     const [invites, setInvites] = useState<any[]>([]);
     const [showNotifDropdown, setShowNotifDropdown] = useState(false);
     const [isLoadingNotifs, setIsLoadingNotifs] = useState(false);
+
+    // Profile Picture Upload States
+    const [isUploading, setIsUploading] = useState(false);
 
     // Fetch Invites Logic (Same as before)
     const fetchNotifications = async () => {
@@ -58,6 +69,58 @@ const MainLayout = () => {
         return () => clearInterval(interval);
     }, [token]);
 
+    // Profile Picture Upload Handlers
+    // file selection & upload
+    const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (!file) return;
+
+        setIsUploading(true);
+        try {
+            // A. Upload to Cloudinary
+            const formData = new FormData();
+            formData.append('file', file);
+            formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
+
+            const cloudRes = await fetch(CLOUDINARY_API_URL, { method: 'POST', body: formData });
+            const cloudData = await cloudRes.json();
+
+            if (!cloudData.secure_url) throw new Error("Cloudinary upload failed");
+            const newImageUrl = cloudData.secure_url;
+
+            // B. Update Backend
+            const backendRes = await fetch(`${BACKEND_URL}/api/user/${user?.user_id}/profile-picture`, {
+                method: 'PATCH',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ profile_picture: newImageUrl })
+            });
+
+            if (!backendRes.ok) throw new Error("Backend update failed");
+
+            // C. Update Context (Optimistic UI)
+            if (updateUser && user) {
+                updateUser({ ...user, profile_picture: newImageUrl });
+            } else {
+                // Fallback if updateUser isn't available
+                window.location.reload(); 
+            }
+            
+            alert("Profile picture updated successfully!");
+
+        } catch (error) {
+            console.error("Upload Error:", error);
+            alert("Failed to update profile picture.");
+        } finally {
+            setIsUploading(false);
+            e.target.value = ''; // Reset file input
+        }
+    };
+
+    
+    // Notification Handlers
     const handleAccept = async (inviteId: number) => {
         setIsLoadingNotifs(true);
         try {
@@ -100,8 +163,16 @@ const MainLayout = () => {
 
     return (
         <div className={styles.layoutContainer}>
+            <input 
+                id="profile-upload-input"
+                type="file" 
+                style={{ display: 'none' }} 
+                accept="image/*" 
+                onChange={handleFileChange}
+                disabled={isUploading} // Disable while uploading
+            />
             
-            {/* --- SIDEBAR --- */}
+            {/* SIDEBAR */}
             <aside className={`${styles.sidebar} ${isCollapsed ? styles.sidebarCollapsed : styles.sidebarExpanded}`}>
                 
                 {/* Brand */}
@@ -146,7 +217,7 @@ const MainLayout = () => {
                 </div>
             </aside>
 
-            {/* --- MAIN CONTENT --- */}
+            {/* MAIN CONTENT */}
             <div className={`${styles.mainContent} ${isCollapsed ? styles.contentCollapsed : styles.contentExpanded}`}>
                 
                 <header className={styles.topHeader}>
@@ -211,10 +282,33 @@ const MainLayout = () => {
                         </div>
 
                         {/* PROFILE */}
-                        <div className={styles.userProfile}>
+                        <label 
+                            htmlFor="profile-upload-input" 
+                            className={styles.userProfile} 
+                            title="Click to update profile picture"
+                            style={{ cursor: isUploading ? 'wait' : 'pointer' }}
+                        >
                             <span className={styles.userName}>{user?.fullname}</span>
-                            <ProfileIcon size={32} color="#5A2167" />
-                        </div>
+                            
+                            {isUploading ? (
+                                <div className={styles.loader} />
+                            ) : user?.profile_picture ? (
+                                <img 
+                                    src={user.profile_picture} 
+                                    alt="Profile" 
+                                    className={styles.profileImage}
+                                    style={{ 
+                                        width: '32px', 
+                                        height: '32px', 
+                                        borderRadius: '50%', 
+                                        objectFit: 'cover',
+                                        border: '2px solid #5A2167' 
+                                    }}
+                                />
+                            ) : (
+                                <ProfileIcon size={32} color="#5A2167" />
+                            )}
+                        </label>
                     </div>
                 </header>
 

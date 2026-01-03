@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/authContext';
-import { IoAdd, IoImageOutline, IoTrashOutline, IoPlayCircle, IoCalendarOutline } from "react-icons/io5";
+import { IoAdd, IoImageOutline, IoTrashOutline, IoPlayCircle, IoCalendarOutline, IoPauseCircle } from "react-icons/io5";
 import styles from './Memories.module.css'; // We will create this next
 import { BACKEND_URL } from '../../constant';
 
@@ -22,6 +22,7 @@ const ImageIcon = IoImageOutline as React.ElementType;
 const TrashIcon = IoTrashOutline as React.ElementType;
 const PlayIcon = IoPlayCircle as React.ElementType;
 const CalendarIcon = IoCalendarOutline as React.ElementType;
+const PauseIcon = IoPauseCircle as React.ElementType;
 
 const Memories = () => {
     const { token } = useAuth();
@@ -30,6 +31,9 @@ const Memories = () => {
     const [memories, setMemories] = useState<Memory[]>([]);
     const [loading, setLoading] = useState(true);
     const [playingAudio, setPlayingAudio] = useState<HTMLAudioElement | null>(null);
+    const [playingMemoryId, setPlayingMemoryId] = useState<number | null>(null);
+
+    const audioRef = useRef<HTMLAudioElement | null>(null);
 
     // 1. Fetch Logic
     const fetchMemories = useCallback(async () => {
@@ -49,9 +53,12 @@ const Memories = () => {
         if (token) fetchMemories();
         // Cleanup audio on unmount
         return () => {
-            if (playingAudio) playingAudio.pause();
+            if (audioRef.current) {
+                audioRef.current.pause();
+                audioRef.current.currentTime = 0;
+            }
         };
-    }, [token, fetchMemories, playingAudio]);
+    }, [token, fetchMemories]);
 
     // 2. Delete Logic
     const handleDelete = async (id: number) => {
@@ -68,15 +75,36 @@ const Memories = () => {
     };
 
     // 3. Audio Player Logic
-    const handlePlayAudio = (url: string) => {
+    const handlePlayAudio = (url: string, id: number) => {
+        // case a: if the user is clicking the same memory that's playing
+        if (playingMemoryId === id && playingAudio) {
+            if(!playingAudio.paused) {
+                playingAudio.pause();
+                setPlayingAudio(null);
+                setPlayingMemoryId(null);
+            }
+            return;
+        }
+
+        // case b: clicking a new memory
+        // b.1: stop the previous audio if any
         if (playingAudio) {
             playingAudio.pause(); // Stop current if playing
-            setPlayingAudio(null);
+            playingAudio.currentTime = 0;
         }
+
+        // b.2: play the new audio
         const audio = new Audio(url);
-        audio.play();
+        audio.play().catch(error => console.error("Audio play failed:", error));
+
         setPlayingAudio(audio);
-        audio.onended = () => setPlayingAudio(null);
+        setPlayingMemoryId(id);
+
+        // reset state when audio ends
+        audio.onended = () => {
+            setPlayingAudio(null);
+            setPlayingMemoryId(null);
+        };
     };
 
     if (loading) return <div className={styles.loading}>Loading gallery...</div>;
@@ -135,10 +163,19 @@ const Memories = () => {
                                     {/* AUDIO BUTTON */}
                                     {mem.audio_url ? (
                                         <button 
-                                            className={styles.audioBtn}
-                                            onClick={() => handlePlayAudio(mem.audio_url!)}
+                                            className={`${styles.audioBtn} ${playingMemoryId === mem.memory_id ? styles.audioBtnActive : ''}`}
+                                            onClick={() => handlePlayAudio(mem.audio_url!, mem.memory_id)}
                                         >
-                                            <PlayIcon size={18} /> Listen
+                                            {/* Toggle Icon based on state */}
+                                            {playingMemoryId === mem.memory_id ? (
+                                                <>
+                                                    <PauseIcon size={18} /> Stop
+                                                </>
+                                            ) : (
+                                                <>
+                                                    <PlayIcon size={18} /> Listen
+                                                </>
+                                            )}
                                         </button>
                                     ) : (
                                         <span className={styles.noAudio}>No Audio</span>
