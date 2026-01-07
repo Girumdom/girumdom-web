@@ -12,7 +12,7 @@ const Layout: React.FC = () => {
 
   return (
     <div className={styles.container}>
-      {/* --- SHARED NAVBAR --- */}
+      {/* SHARED NAVBAR */}
       <nav className={styles.navbar}>
         <div className={styles.navContent}>
           <Link to="/" className={styles.brand}>
@@ -39,13 +39,13 @@ const Layout: React.FC = () => {
         </div>
       </nav>
 
-      {/* --- DYNAMIC PAGE CONTENT --- */}
+      {/* DYNAMIC PAGE CONTENT */}
       {/* This <Outlet /> is where LandingPage or HowItWorks will appear */}
       <div className={styles.pageContent}>
         <Outlet />
       </div>
 
-      {/* --- SHARED FOOTER --- */}
+      {/* SHARED FOOTER */}
       <footer className={styles.footer}>
         <div className={styles.footerContent}>
           <p className={styles.copyright}>© 2025 Girumdom.</p>

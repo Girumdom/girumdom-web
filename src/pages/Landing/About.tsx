@@ -250,14 +250,14 @@ const About: React.FC = () => {
           </div>
         </section>
 
-        {/* --- TECHNICAL DEEP DIVE (Updated for Defense) --- */}
+        {/* TECHNICAL DEEP DIVE */}
         <section className={styles.techSection}>
           <div className={styles.techContainer}>
             <button 
               className={styles.techToggleBtn} 
               onClick={() => setIsTechOpen(!isTechOpen)}
             >
-              <span>"Under the Hood" Technical Summary</span>
+              <span>Additional Information</span>
               {isTechOpen ? <UpIcon /> : <DownIcon />}
             </button>
 

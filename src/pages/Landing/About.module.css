@@ -270,7 +270,7 @@
 }
 
 .techCard h3 {
-    color: #c084fc; /* Light purple */
+    color: #fff;
     margin-bottom: 0.5rem;
     font-size: 1.125rem;
 }
@@ -482,7 +482,7 @@
 }
 
 .blockTitle {
-    color: #e9d5ff; /* Light Purple */
+    color: #ffffff; 
     font-size: 1.25rem;
     margin-bottom: 1.5rem;
     font-weight: 700;
