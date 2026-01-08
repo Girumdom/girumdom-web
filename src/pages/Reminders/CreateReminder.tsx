@@ -50,13 +50,17 @@ const CreateReminder = () => {
         try {
             setIsSubmitting(true);
             
-            // Combine Date and Time into MySQL Format (YYYY-MM-DD HH:MM:SS)
-            const combinedDateTime = `${date} ${time}:00`;
+            // 1. Create a Date object using the user's LOCAL time input
+            // The 'T' character ensures the browser parses it correctly as local ISO format
+            const localDateObj = new Date(`${date}T${time}:00`);
+
+            // 2. Convert it to a UTC ISO String immediately
+            const utcDateTime = localDateObj.toISOString();
 
             await axios.post(`${BACKEND_URL}/api/collaborations/${selectedCollabId}/reminders`, {
                 title,
                 description: desc,
-                reminder_date: combinedDateTime,
+                reminder_date: utcDateTime, // Send the UTC string!
                 repeat_interval: repeat
             }, {
                 headers: { Authorization: `Bearer ${token}` }
